@@ -1,0 +1,116 @@
+import streamlit as st
+import pymongo
+
+myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+
+omds = myclient["omds"]
+users = omds["users"]
+medicines = omds["medicines"]
+donations = omds["donations"]
+
+
+class Client:
+    def __init__(self, email, password, first_name=None, last_name=None, phone=None, address=None) -> None:
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.phone = phone
+        self.address = address
+        self.password = password
+
+    def register(self):
+        user = users.find_one({"email": self.email})
+        if user:
+            return "already_exists"
+        document = {
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "phone": self.phone,
+            "address": self.address,
+            "password": self.password
+        }
+        users.insert_one(document)
+        return "success"
+
+    def authenticate(self):
+        user = users.find_one({"email": self.email})
+        if not user:
+            return "no_user"
+        if user["password"] == self.password:
+            return "success"
+        else:
+            return "failure"
+
+
+def register_widget():
+    with st.form("Register"):
+        st.header("Registration Details")
+        col1, col2 = st.columns(2)
+        with col1:
+            first_name = st.text_input("First name")
+        with col2:
+            last_name = st.text_input("Last name")
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            email = st.text_input("E-mail")
+        with col2:
+            phone = st.text_input("Phone number")
+        address = st.text_area("Address")
+        col1, col2 = st.columns(2)
+        with col1:
+            password = st.text_input("Password", type="password")
+        with col2:
+            confirm_password = st.text_input(
+                "Confirm password", type="password")
+        clicked = st.form_submit_button("Register")
+        if clicked:
+            if first_name == "":
+                st.error("First name is a required field!")
+            if last_name == "":
+                st.error("Last name is a required field!")
+            if email == "":
+                st.error("E-mail is a required field!")
+            if address == "":
+                st.error("Address is a required field!")
+            if phone == "":
+                st.error("Phone number is a required field!")
+            if password == "":
+                st.error("Password is a required field!")
+            if password != confirm_password:
+                st.error("Password and Confirm password must be same!")
+            if len(password) < 6:
+                st.error("Password must be atleast 6 characters long!")
+            else:
+                client = Client(email, password, first_name,
+                                last_name, phone, address)
+                result = client.register()
+                if result == "already_exists":
+                    st.error("User already exists!")
+                else:
+                    st.success("Registration successful!")
+
+
+def login_widget():
+    with st.form("Login"):
+        st.header("User Login")
+        email = st.text_input("E-mail")
+        password = st.text_input("Password", type="password")
+        clicked = st.form_submit_button("Login")
+        if clicked:
+            if email == "":
+                st.error("E-mail is a required field!")
+            if password == "":
+                st.error("Password is a required field!")
+            else:
+                client = Client(email, password)
+                result = client.authenticate()
+                if result == "no_user":
+                    st.error("User does not exist!")
+                elif result == "failure":
+                    st.error("Incorrect password!")
+                else:
+                    st.success("Login successful!")
+
+login_widget()
+# register_widget()

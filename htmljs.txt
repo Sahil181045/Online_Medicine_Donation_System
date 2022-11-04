@@ -1,0 +1,10 @@
+my_js = """
+    document.getElementById("register_link").onclick = function() {
+        login_widget()
+    }
+    """
+    my_html = f"""
+    <a href="#" id="register_link">Already registered? Click here to login!</a>
+    <script>{my_js}</script>
+    """
+    html(my_html)
