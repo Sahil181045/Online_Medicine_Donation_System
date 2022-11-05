@@ -1,4 +1,4 @@
-from ..dependencies import medicines
+from dependencies import medicines
 
 
 class Medicine:

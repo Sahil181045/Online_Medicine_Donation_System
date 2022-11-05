@@ -1,5 +1,7 @@
-from ..dependencies import st, switch_page
-from ..classes.client import *
+from dependencies import st, switch_page
+from classes.client import *
+
+st.set_page_config(layout="wide")
 
 st.header("Registration Details")
 
@@ -30,24 +32,34 @@ if clicked_login:
     switch_page("login")
 
 if clicked:
+    n_errors = 0
+
     if first_name == "":
         st.error("First name is a required field!")
+        n_errors += 1
     if last_name == "":
         st.error("Last name is a required field!")
+        n_errors += 1
     if email == "":
         st.error("E-mail is a required field!")
+        n_errors += 1
     if address == "":
         st.error("Address is a required field!")
+        n_errors += 1
     if phone == "":
         st.error("Phone number is a required field!")
+        n_errors += 1
     if password == "":
         st.error("Password is a required field!")
+        n_errors += 1
     if password != confirm_password:
         st.error("Password and Confirm password must be same!")
+        n_errors += 1
     if len(password) < 6:
         st.error("Password must be atleast 6 characters long!")
+        n_errors += 1
 
-    else:
+    if n_errors == 0:
         client = Client(email, password, first_name,
                         last_name, phone, address)
         result = client.register()
@@ -55,4 +67,8 @@ if clicked:
         if result == "already_exists":
             st.error("User already exists!")
         else:
-            st.success("Registration successful!")
+            st.session_state.email = email
+            if st.session_state.profile == "user":
+                switch_page("donation_page")
+            else:
+                switch_page("approve_donations")

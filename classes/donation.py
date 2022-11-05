@@ -1,4 +1,4 @@
-from ..dependencies import donations
+from dependencies import donations
 
 
 class Donation:
@@ -16,6 +16,6 @@ class Donation:
             "expiry_date": self.expiry_date,
             "quantity": self.quantity,
             "collection_time": self.collection_time,
-            "is_approved": False
+            "approval_status": "Pending"
         }
         donations.insert_one(document)

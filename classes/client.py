@@ -1,4 +1,4 @@
-from ..dependencies import users
+from dependencies import users
 
 
 class Client:
