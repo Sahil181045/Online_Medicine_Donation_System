@@ -1,9 +1,4 @@
-import pymongo
-
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-
-omds = myclient["omds"]
-users = omds["users"]
+from ..dependencies import users
 
 
 class Client:
