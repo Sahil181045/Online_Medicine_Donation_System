@@ -1,7 +1,10 @@
-from dependencies import st, switch_page
-from classes.client import *
+from dependencies import st, switch_page, hide_icons, hide_sidebar, remove_whitespaces
+from classes.client import Client
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
+hide_icons()
+hide_sidebar()
+remove_whitespaces()
 
 st.header("Registration Details")
 

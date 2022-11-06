@@ -7,8 +7,6 @@ def donation_page():
     user_email = st.session_state.email
     active_user = users.find_one({"email": user_email})
 
-    st.set_page_config(layout="wide")
-
     st.subheader("We encourage donors not to purchase new medicines as our endeavour \
         is to increase impact by reducing waste")
 
@@ -41,7 +39,7 @@ def donation_page():
             st.write(":x:", med)
 
     with col2:
-        with st.form("donation_form", clear_on_submit=True):
+        with st.form("donation_form"):
             st.write("User Details")
             name = st.text_input(
                 "Name", placeholder=active_user["first_name"]+" "+active_user["last_name"], disabled=True)
@@ -69,6 +67,12 @@ def donation_page():
                 n_errors += 1
             if quantity == "":
                 st.error("Quantity is a required field!")
+                n_errors += 1
+            elif not float(quantity).is_integer():
+                st.error("Quantity must be an integer!")
+                n_errors += 1
+            elif int(quantity) <= 0:
+                st.error("Quantity must be greater than 0!")
                 n_errors += 1
             if expiry_date == "":
                 st.error("Expiry date is a required field!")
