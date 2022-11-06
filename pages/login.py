@@ -39,6 +39,6 @@ if clicked:
 		else:
 			st.session_state.email = email
 			if st.session_state.profile == "user":
-				switch_page("donation_page")
+				switch_page("user_page")
 			else:
-				switch_page("approve_donations")
+				switch_page("admin_page")
