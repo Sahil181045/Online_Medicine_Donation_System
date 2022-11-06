@@ -80,6 +80,13 @@ def donation_page():
             if collection_time == "":
                 st.error("Collection time is a required field!")
                 n_errors += 1
+            if expiry_date < collection_time:
+                st.error("Collection time must be prior to the expiry date")
+                n_errors += 1
+            if collection_time <= date.today() or expiry_date <= date.today():
+                st.error(
+                    "Collection time and Expiry date must be past the current date")
+                n_errors += 1
 
             if n_errors == 0:
                 user_id = active_user["_id"]
