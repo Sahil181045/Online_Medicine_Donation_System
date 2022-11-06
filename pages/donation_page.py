@@ -1,5 +1,5 @@
 from dependencies import st, Image
-from dependencies import users
+from dependencies import users, date
 from classes.donation import *
 
 user_email = st.session_state.email
@@ -7,8 +7,16 @@ active_user = users.find_one({"email": user_email})
 
 st.set_page_config(layout="wide")
 
-st.write("We encourage donors not to purchase new medicines as our endeavour \
+st.subheader("We encourage donors not to purchase new medicines as our endeavour \
 	is to increase impact by reducing waste")
+
+
+def clear_form():
+    st.session_state["medicine_name"] = ""
+    st.session_state["expiry_date"] = date.today()
+    st.session_state["quantity"] = ""
+    st.session_state["collection_time"] = date.today()
+
 
 st.markdown("---")
 
@@ -19,7 +27,7 @@ med_list = ["Common acute bacterial, viral and parasitic infections",
             "Skin Conditions", "Aches and Pains", "Cold relief", "Neurological diseases"]
 
 do_not_donate = ["Liquids", "Injectables", "Ayurvedic or Homeopathic medicines",
-                 "Narcotics or psychotropic medicines"]
+                 "Narcotics or psychotropic drugs"]
 
 with col1:
     medicine_img = Image.open("images/medicine.png")
@@ -44,39 +52,37 @@ with col2:
 
         st.markdown("---")
         st.write("Donation Details")
-        medicine_name = st.text_input("Medicine Name")
-        expiry_date = st.date_input("Expiry Date")
-        quantity = st.text_input("Quantity")
-        collection_time = st.date_input("Collection Time")
-        donate_button = st.form_submit_button("Donate")
+        medicine_name = st.text_input("Medicine Name", key="medicine_name")
+        expiry_date = st.date_input("Expiry Date", key="expiry_date")
+        quantity = st.text_input("Quantity", key="quantity")
+        collection_time = st.date_input(
+            "Collection Time", key="colletion_time")
+        donate_button = st.form_submit_button(label="Donate")
+        clear_button = st.form_submit_button(
+            label="Clear Form", on_click=clear_form)
+
+    if donate_button:
+        n_errors = 0
+
+        if medicine_name == "":
+            st.error("Medicine name is a required field!")
+            n_errors += 1
+        if quantity == "":
+            st.error("Quantity is a required field!")
+            n_errors += 1
+        if expiry_date == "":
+            st.error("Expiry date is a required field!")
+            n_errors += 1
+        if collection_time == "":
+            st.error("Collection time is a required field!")
+            n_errors += 1
+
+        if n_errors == 0:
+            user_id = active_user["_id"]
+            donation = Donation(user_id, medicine_name,
+                                str(expiry_date), int(quantity), str(collection_time))
+            donation.donate_medicine()
+            st.success(
+                "Donation Successful!\nYou can view your donations and approval status in User Donation History.")
+
 st.markdown("---")
-
-columns = st.columns((3, 1, 3))
-clear_button = columns[1].button("Clear Form")
-
-
-if donate_button:
-    n_errors = 0
-
-    if medicine_name == "":
-        st.error("Medicine name is a required field!")
-        n_errors += 1
-    if quantity == "":
-        st.error("Quantity is a required field!")
-        n_errors += 1
-    if expiry_date == "":
-        st.error("Expiry date is a required field!")
-        n_errors += 1
-    if collection_time == "":
-        st.error("Collection time is a required field!")
-        n_errors += 1
-
-    if n_errors == 0:
-        user_id = active_user["_id"]
-        donation = Donation(user_id, medicine_name,
-                            str(expiry_date), int(quantity), str(collection_time))
-        donation.donate_medicine()
-        st.success("Donation successful!")
-
-if clear_button:
-    pass
