@@ -2,7 +2,7 @@ import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 import pymongo
 from PIL import Image
-from datetime import date, timedelta
+from datetime import date
 import unittest
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
