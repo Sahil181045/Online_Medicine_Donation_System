@@ -55,7 +55,7 @@ def donation_page():
             expiry_date = st.date_input("Expiry Date", key="expiry_date")
             quantity = st.text_input("Quantity", key="quantity")
             collection_time = st.date_input(
-                "Collection Time", key="colletion_time")
+                "Collection Time", key="collection_time")
             donate_button = st.form_submit_button(label="Donate")
             clear_button = st.form_submit_button(
                 label="Clear Form", on_click=clear_form)
