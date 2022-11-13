@@ -18,4 +18,4 @@ class Donation:
             "collection_time": self.collection_time,
             "approval_status": "Pending"
         }
-        donations.insert_one(document)
+        return donations.insert_one(document).inserted_id
