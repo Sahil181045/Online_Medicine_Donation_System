@@ -1,3 +1,4 @@
+from dependencies import date
 def check_quantity(quantity):
 	if quantity == "":
 		return "Quantity is a required field!"
@@ -7,7 +8,6 @@ def check_quantity(quantity):
 		return "Quantity must be greater than 0!"
 
 def check_dates(expiry_date, collection_time):
-	from dependencies import date
 	if expiry_date == "":
 		return "Expiry date is a required field!"
 	if collection_time == "":
