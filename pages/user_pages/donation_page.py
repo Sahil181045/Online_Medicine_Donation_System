@@ -26,7 +26,7 @@ def donation_page():
                 "Skin Conditions", "Aches and Pains", "Cold relief", "Neurological diseases"]
 
     do_not_donate = ["Liquids", "Injectables", "Ayurvedic or Homeopathic medicines",
-                     "Narcotics or psychotropic drugs"]
+                    "Narcotics or psychotropic drugs"]
 
     with col1:
         medicine_img = Image.open("images/medicine.png")
@@ -44,21 +44,17 @@ def donation_page():
             st.write("User Details")
             name = st.text_input(
                 "Name", placeholder=active_user["first_name"]+" "+active_user["last_name"], disabled=True)
-            phone = st.text_input(
-                "Phone Number", placeholder=active_user["phone"], disabled=True)
-            email = st.text_input(
-                "Email Address", placeholder=active_user["email"], disabled=True)
+            phone = st.text_input("Phone Number", placeholder=active_user["phone"], disabled=True)
+            email = st.text_input("Email Address", placeholder=active_user["email"], disabled=True)
 
             st.markdown("---")
             st.write("Donation Details")
             medicine_name = st.text_input("Medicine Name", key="medicine_name")
             expiry_date = st.date_input("Expiry Date", key="expiry_date")
             quantity = st.text_input("Quantity", key="quantity")
-            collection_time = st.date_input(
-                "Collection Time", key="collection_time")
+            collection_time = st.date_input("Collection Time", key="collection_time")
             donate_button = st.form_submit_button(label="Donate")
-            clear_button = st.form_submit_button(
-                label="Clear Form", on_click=clear_form)
+            clear_button = st.form_submit_button(label="Clear Form", on_click=clear_form)
 
         if donate_button:
             n_errors = 0

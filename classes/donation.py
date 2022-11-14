@@ -2,7 +2,7 @@ from dependencies import donations
 
 
 class Donation:
-    def __init__(self, user_id, medicine_name, expiry_date, quantity, collection_time) -> None:
+    def __init__(self, user_id, medicine_name, expiry_date, quantity, collection_time):
         self.user_id = user_id
         self.medicine_name = medicine_name
         self.expiry_date = expiry_date

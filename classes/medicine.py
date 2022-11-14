@@ -2,7 +2,7 @@ from dependencies import medicines
 
 
 class Medicine:
-    def __init__(self, medicine_name, expiry_date, quantity) -> None:
+    def __init__(self, medicine_name, expiry_date, quantity):
         self.medicine_name = medicine_name
         self.expiry_date = expiry_date
         self.quantity = quantity

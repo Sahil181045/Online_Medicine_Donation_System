@@ -1,7 +1,6 @@
 from dependencies import unittest
 from error_validation import check_quantity
 
-
 class QuantityValidator(unittest.TestCase):
     def test_1(self):
         quantity = ""
