@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 Pillow==9.2.0
 pymongo==4.2.0
 streamlit==1.13.0
 streamlit_extras==0.1.5
+=======
+Pillow==9.1.0
+pymongo==4.2.0
+streamlit==1.13.0
+streamlit-extras==0.1.5
+>>>>>>> 45c42cceed52b3432e6296f6e482e7443f543899
