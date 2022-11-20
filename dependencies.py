@@ -1,11 +1,13 @@
 import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
 import pymongo
+import certifi
 from PIL import Image
 from datetime import date
 import unittest
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient(
+    "mongodb+srv://Sahil:jv5U7N4fEDWSjZL2@cluster0.1zktl9j.mongodb.net/test", tlsCAFile=certifi.where())
 omds = myclient["omds"]
 users = omds["users"]
 admins = omds["admins"]
