@@ -11,7 +11,6 @@ class Admin(Client):
         donations.update_one(search_query, update_query)
 
         if approval_response == "Approved":
-
             donation = donations.find_one(search_query)
             medicine_name = donation["medicine_name"]
             expiry_date = donation["expiry_date"]

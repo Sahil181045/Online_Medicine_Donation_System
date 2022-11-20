@@ -3,7 +3,7 @@ from dependencies import users, admins
 
 
 class Client:
-	def __init__(self, email, password, first_name=None, last_name=None, phone=None, address=None) -> None:
+	def __init__(self, email, password, first_name=None, last_name=None, phone=None, address=None):
 		self.first_name = first_name
 		self.last_name = last_name
 		self.email = email

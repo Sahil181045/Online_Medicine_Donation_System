@@ -1,7 +1,6 @@
 from dependencies import unittest, date
 from error_validation import check_dates
 
-
 class DatesValidator(unittest.TestCase):
     def test_1(self):
         expiry_date = date.today()

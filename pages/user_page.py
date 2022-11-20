@@ -7,8 +7,7 @@ hide_icons()
 hide_sidebar()
 remove_whitespaces()
 
-selected = st.selectbox(
-    "", ("Donate Medicine", "View Donation History"), label_visibility="hidden")
+selected = st.selectbox("", ("Donate Medicine", "View Donation History"), label_visibility="hidden")
 st.write("####")
 
 if selected == "Donate Medicine":

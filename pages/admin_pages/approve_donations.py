@@ -33,10 +33,8 @@ def approve_donations():
             with col8:
                 placeholder_accept = st.empty()
                 placeholder_reject = st.empty()
-                clicked_accept = placeholder_accept.button(
-                    "Approve", key="ACC-"+str(i))
-                clicked_reject = placeholder_reject.button(
-                    "Reject", key="REJ-"+str(i))
+                clicked_accept = placeholder_accept.button("Approve", key="ACC-"+str(i))
+                clicked_reject = placeholder_reject.button("Reject", key="REJ-"+str(i))
 
                 if clicked_accept:
                     donation_id = donations_list[i]["_id"]

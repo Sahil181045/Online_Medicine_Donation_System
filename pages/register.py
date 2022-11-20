@@ -63,8 +63,7 @@ if clicked:
         n_errors += 1
 
     if n_errors == 0:
-        client = Client(email, password, first_name,
-                        last_name, phone, address)
+        client = Client(email, password, first_name, last_name, phone, address)
         result = client.register()
 
         if result == "already_exists":

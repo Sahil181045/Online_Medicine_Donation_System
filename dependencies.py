@@ -45,5 +45,4 @@ def remove_whitespaces():
                     padding-bottom: 3.5rem;
                     padding-left: 1rem;
                 }
-        </style>
-        """, unsafe_allow_html=True)
+        </style>""", unsafe_allow_html=True)
