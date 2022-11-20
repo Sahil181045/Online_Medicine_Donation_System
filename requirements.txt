@@ -1,13 +1,4 @@
-<<<<<<< HEAD
 Pillow==9.3.0
 pymongo==4.2.0
 streamlit==1.13.0
 streamlit_extras==0.2.2
-=======
-streamlit
-streamlit_extras
-pymongo
-PIL
-datetime
-unittest
->>>>>>> 408990b1a250199094bfcf1788d5bf7cddd85a9a
