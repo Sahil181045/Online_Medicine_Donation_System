@@ -2,3 +2,4 @@ Pillow==9.1.0
 pymongo==4.2.0
 streamlit==1.13.0
 streamlit-extras==0.1.5
+pymongo[srv]
