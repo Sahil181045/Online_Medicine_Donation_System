@@ -6,8 +6,10 @@ from PIL import Image
 from datetime import date
 import unittest
 
+USER_NAME = st.secrets["db_username"]
+PASSWORD = st.secrets["db_password"]
 myclient = pymongo.MongoClient(
-    "mongodb+srv://Sahil:jv5U7N4fEDWSjZL2@cluster0.1zktl9j.mongodb.net/test", tlsCAFile=certifi.where())
+    f"mongodb+srv://{USER_NAME}:{PASSWORD}@cluster0.1zktl9j.mongodb.net/test", tlsCAFile=certifi.where())
 omds = myclient["omds"]
 users = omds["users"]
 admins = omds["admins"]
