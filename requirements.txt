@@ -1,4 +1,4 @@
-Pillow==9.3.0
+Pillow==9.1.0
 pymongo==4.2.0
 streamlit==1.13.0
-streamlit_extras==0.2.2
+streamlit-extras==0.1.5
